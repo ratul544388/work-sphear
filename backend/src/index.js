@@ -10,8 +10,6 @@ import "./lib/passport.js";
 
 import authRoutes from "./routes/auth.route.js";
 import usersRoute from "./routes/users-route.js";
-// import workEntriesRoute from "./routes/work-entries.route.js";
-// import payrollsRoute from "./routes/payrolls.route.js"
 import cloudinaryRoute from "./routes/cloudinary.route.js"
 import adminRoutes from "./routes/admin.route.js"
 import hrRoutes from "./routes/hr-route.js"
@@ -51,8 +49,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoute);
-// app.use("/api/work-entries", workEntriesRoute);
-// app.use("/api/payrolls", payrollsRoute);
 app.use("/api/cloudinary", cloudinaryRoute);
 app.use("/api/admin", adminRoutes);
 app.use("/api/hr", hrRoutes);
