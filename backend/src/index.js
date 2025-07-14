@@ -65,7 +65,7 @@ app.get("/cross-origin-check", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`)
   try {
     await db.$connect();
     console.log("✅✅✅ Connected to MongoDB via Prisma");
