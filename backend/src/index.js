@@ -35,6 +35,8 @@ app.use(
   })
 );
 
+app.use("/api/webhooks/stripe", stripeWebhookRoute);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -53,7 +55,6 @@ app.use("/api/users", usersRoute);
 app.use("/api/cloudinary", cloudinaryRoute);
 app.use("/api/admin", adminRoutes);
 app.use("/api/hr", hrRoutes);
-app.use("/api/webhooks/stripe", stripeWebhookRoute);
 
 app.get("/", (req, res) => {
   res.send({
@@ -66,7 +67,7 @@ app.get("/cross-origin-check", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`Server is running on port ${PORT}`)
+  console.log(`Server is running on port ${PORT}`);
   try {
     await db.$connect();
     console.log("✅✅✅ Connected to MongoDB via Prisma");
