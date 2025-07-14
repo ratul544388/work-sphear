@@ -29,7 +29,7 @@ router.post(
         where: { id: payrollId },
         data: {
           paidAt: new Date(),
-          transactionId: intent.id,
+          transactionId: intent.id
         },
       });
     }
