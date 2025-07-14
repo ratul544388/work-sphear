@@ -20,6 +20,7 @@ import Progress from "../app/pages/protected/hr/progress";
 import AllEmployeeList from "@/app/pages/protected/admin/all-employee-list";
 import YouAreFired from "@/app/pages/protected/you-are-fired";
 import Payroll from "@/app/pages/protected/admin/payroll";
+import Test from "@/app/test";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         Component: Home,
+      },
+      {
+        path: "/test",
+        Component: Test,
       },
       {
         Component: AuthLayout,
