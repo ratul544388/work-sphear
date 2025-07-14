@@ -58,6 +58,12 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/hr", hrRoutes);
 app.use("/api/webhooks/stripe", stripeWebhookRoute);
 
+app.get("/", (req, res) => {
+  res.send({
+    message: "Server is running!!!"
+  })
+})
+
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
   try {
