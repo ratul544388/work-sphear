@@ -10,10 +10,10 @@ import "./lib/passport.js";
 
 import authRoutes from "./routes/auth.route.js";
 import usersRoute from "./routes/users-route.js";
-import cloudinaryRoute from "./routes/cloudinary.route.js"
-import adminRoutes from "./routes/admin.route.js"
-import hrRoutes from "./routes/hr-route.js"
-import stripeWebhookRoute from './routes/webhooks/stripe.js'
+import cloudinaryRoute from "./routes/cloudinary.route.js";
+import adminRoutes from "./routes/admin.route.js";
+import hrRoutes from "./routes/hr-route.js";
+import stripeWebhookRoute from "./routes/webhooks/stripe.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -23,7 +23,7 @@ const app = express();
 app.use(
   cors({
     origin: process.env.VITE_APP_URL,
-    credentials: true
+    credentials: true,
   })
 );
 
@@ -56,9 +56,13 @@ app.use("/api/webhooks/stripe", stripeWebhookRoute);
 
 app.get("/", (req, res) => {
   res.send({
-    message: "Server is running!!!"
-  })
-})
+    message: "Server is running!!!",
+  });
+});
+
+app.get("/cross-origin-check", (req, res) => {
+  res.send({ VITE_APP_URL: VITE_APP_URL });
+});
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
