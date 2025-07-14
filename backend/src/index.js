@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/cross-origin-check", (req, res) => {
-  res.send({ VITE_APP_URL: VITE_APP_URL });
+  res.send({ VITE_APP_URL: process.env.VITE_APP_URL });
 });
 
 app.listen(PORT, async () => {
