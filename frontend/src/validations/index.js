@@ -86,3 +86,9 @@ export const payrollRequestSchema = z.object({
     .int("Salary must be an integer")
     .min(0, "Salary must be a positive number"),
 });
+
+
+export const contactMessageSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  message: z.string().min(1, { message: "Message is required" }),
+});

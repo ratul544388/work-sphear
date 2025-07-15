@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { useModalStore } from "@/hooks/use-modal-store";
 import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
-import React from "react";
 
 const FiredButton = ({ user }) => {
   const queryClient = useQueryClient();
@@ -10,7 +9,6 @@ const FiredButton = ({ user }) => {
   const { id, isFired, name } = user;
 
   const handleSuccess = () => {
-    console.log("called");
     queryClient.setQueryData(["employees"], (oldData) => {
       return oldData.map((e) => (e.id === id ? { ...e, isFired: true } : e));
     });
@@ -21,7 +19,7 @@ const FiredButton = ({ user }) => {
       disabled={isFired}
       onClick={() =>
         onOpen("confirmModal", {
-          api: `/admin/employees/${id}/fire`,
+          api: `/users/${id}/fire`,
           method: "patch",
           title: `Fire ${name}`,
           onSuccess: handleSuccess,

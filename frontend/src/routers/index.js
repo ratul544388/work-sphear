@@ -4,23 +4,25 @@ import NotFound from "@/app/not-found";
 import AuthLayout from "@/app/pages/auth/layout";
 import Login from "@/app/pages/auth/login";
 import Register from "@/app/pages/auth/register";
+import AllEmployeeList from "@/app/pages/protected/admin/all-employee-list";
 import AdminLayout from "@/app/pages/protected/admin/layout";
+import Payroll from "@/app/pages/protected/admin/payroll";
 import CompleteProfile from "@/app/pages/protected/complete-profile";
 import EmployeeLayout from "@/app/pages/protected/employee/layout";
-import PaymentHistory from "@/app/pages/protected/employee/payment-history";
 import WorkSheet from "@/app/pages/protected/employee/work-sheet";
 import EmployeeDetails from "@/app/pages/protected/hr/employee-details";
 import EmployeeList from "@/app/pages/protected/hr/employee-list";
 import HRLayout from "@/app/pages/protected/hr/layout";
 import ProtectedLayout from "@/app/pages/protected/layout";
 import Profile from "@/app/pages/protected/profile";
+import YouAreFired from "@/app/pages/protected/you-are-fired";
+import About from "@/app/pages/public/about";
 import Home from "@/app/pages/public/home";
+import LayoutWithFooter from "@/app/pages/public/layout";
 import { createBrowserRouter } from "react-router";
 import Progress from "../app/pages/protected/hr/progress";
-import AllEmployeeList from "@/app/pages/protected/admin/all-employee-list";
-import YouAreFired from "@/app/pages/protected/you-are-fired";
-import Payroll from "@/app/pages/protected/admin/payroll";
-import Test from "@/app/test";
+import PaymentHistory from "@/app/pages/protected/employee/payment-history";
+import ContactUs from "@/app/pages/public/contact-us";
 
 export const router = createBrowserRouter([
   {
@@ -32,8 +34,12 @@ export const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "/test",
-        Component: Test,
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/contact-us",
+        Component: ContactUs,
       },
       {
         Component: AuthLayout,

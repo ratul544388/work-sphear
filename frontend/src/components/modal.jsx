@@ -22,12 +22,14 @@ const Modal = ({
   };
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className={cn(className)}>
+      <DialogContent className={cn('', className)}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        {children}
+        <div className="max-h-[80vh] overflow-y-auto overflow-clip">
+          {children}
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -1,3 +1,4 @@
+import { request } from "@/lib/request";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -6,8 +7,6 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { LoadingButton } from "./loading-button";
 import { Form } from "./ui/form";
-import { request } from "@/lib/request";
-import { Button } from "./ui/button";
 
 export function FormWrapper({
   schema,
@@ -28,6 +27,7 @@ export function FormWrapper({
   invalidateQueryKeys = [],
   insideModal = false,
   setIsPending,
+  formResetAfterSuccess,
 }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -46,6 +46,7 @@ export function FormWrapper({
       });
     },
     onSuccess: (data) => {
+      if (formResetAfterSuccess) form.reset();
       if (showSuccessToast && data.message) toast.success(data.message);
       if (onSuccess) onSuccess(data);
       if (redirectUrlAfterSuccess) {

@@ -7,6 +7,7 @@ router.post(
   "/",
   express.raw({ type: "application/json" }),
   async (req, res) => {
+    console.log("This is trigger");
     const sig = req.headers["stripe-signature"];
     let event;
 
@@ -17,8 +18,11 @@ router.post(
         process.env.STRIPE_WEBHOOK_SECRET
       );
     } catch (err) {
+      console.log(err);
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
+
+    console.log("✅ Webhook received:", event.type);
 
     if (event.type === "payment_intent.succeeded") {
       const intent = event.data.object;
@@ -29,7 +33,7 @@ router.post(
         where: { id: payrollId },
         data: {
           paidAt: new Date(),
-          transactionId: intent.id
+          transactionId: intent.id,
         },
       });
     }
@@ -39,7 +43,7 @@ router.post(
 );
 
 router.get("/", (req, res) => {
-  return res.send({ message: "Webhook is working" });
+  res.send({ message: "Stripe is working" });
 });
 
 export default router;

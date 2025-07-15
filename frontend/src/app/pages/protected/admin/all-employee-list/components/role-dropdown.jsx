@@ -6,16 +6,16 @@ import { toast } from "sonner";
 
 const RoleDropdown = ({ user }) => {
   const queryClient = useQueryClient();
-  const { name, id, role } = user;
+  const { id, role } = user;
   const { mutate, isPending } = useMutation({
     mutationFn: (newRole) =>
       request({
         method: "patch",
-        url: `/admin/employees/${id}/role`,
+        url: `/users/${id}/role`,
         data: { role: newRole },
       }),
-    onSuccess: (_, newRole) => {
-      toast.success(`${name} is now ${newRole}`);
+    onSuccess: (data, newRole) => {
+      toast.success(data.message);
       queryClient.setQueryData(["employees"], (oldData) => {
         return oldData.map((e) => (e.id === id ? { ...e, role: newRole } : e));
       });

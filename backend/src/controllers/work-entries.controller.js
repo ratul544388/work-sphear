@@ -30,6 +30,19 @@ export const updateWorkEntry = asyncHandler(async (req, res) => {
 });
 
 export const getWorkEntries = asyncHandler(async (req, res) => {
+  const workEntries = await db.workEntry.findMany({
+    where: {
+      userId: req.user.id,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return res.status(200).json(workEntries);
+});
+
+export const getAllWorkEntries = asyncHandler(async (req, res) => {
   const { user_id, task, order_by = "desc", month, employee_name } = req.query;
   const user = req.user;
 
@@ -38,12 +51,7 @@ export const getWorkEntries = asyncHandler(async (req, res) => {
 
   const workEntries = await db.workEntry.findMany({
     where: {
-      ...(user.role === "EMPLOYEE" ? { userId: req.user.id } : {}),
-      ...(user.role === "HR"
-        ? {
-            ...(user_id ? { userId: user_id } : {}),
-          }
-        : {}),
+      ...(user_id ? { userId: user_id } : {}),
       ...(employee_name
         ? {
             user: {

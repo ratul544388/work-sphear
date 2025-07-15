@@ -14,7 +14,7 @@ const AuthLayout = () => {
   return (
     <Container
       elem="main"
-      className="flex items-center justify-center min-h-main py-10"
+      className="flex items-center justify-center min-h-main pt-10"
     >
       <Outlet />
     </Container>

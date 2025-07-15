@@ -9,11 +9,12 @@ import { db } from "./lib/db.js";
 import "./lib/passport.js";
 
 import authRoutes from "./routes/auth.route.js";
-import usersRoute from "./routes/users-route.js";
 import cloudinaryRoute from "./routes/cloudinary.route.js";
-import adminRoutes from "./routes/admin.route.js";
-import hrRoutes from "./routes/hr-route.js";
-import stripeWebhookRoute from "./routes/webhooks/stripe.js";
+import payrollsRoute from "./routes/payrolls.route.js";
+import usersRoute from "./routes/users-route.js";
+import stripeWebhookRoute from './routes/webhooks/stripe.js';
+import workEntriesRoute from "./routes/work-entries.route.js";
+import contactRoutes from "./routes/contact.route.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -35,14 +36,11 @@ app.use(
   })
 );
 
-app.use("/api/webhooks/stripe", stripeWebhookRoute);
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send({
@@ -52,19 +50,11 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoute);
+app.use("/api/work-entries", workEntriesRoute);
+app.use("/api/payrolls", payrollsRoute);
 app.use("/api/cloudinary", cloudinaryRoute);
-app.use("/api/admin", adminRoutes);
-app.use("/api/hr", hrRoutes);
-
-app.get("/", (req, res) => {
-  res.send({
-    message: "Server is running!!!",
-  });
-});
-
-app.get("/cross-origin-check", (req, res) => {
-  res.send({ VITE_APP_URL: process.env.VITE_APP_URL });
-});
+app.use("/api/contact", contactRoutes);
+app.use("/api/webhooks/stripe", stripeWebhookRoute);
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);

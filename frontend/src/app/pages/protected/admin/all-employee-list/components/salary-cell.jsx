@@ -24,14 +24,14 @@ const SalaryCell = ({ user }) => {
     mutationFn: () =>
       request({
         method: "patch",
-        url: `/admin/employees/${id}/salary`,
+        url: `/users/${id}/salary`,
         data: { salary: value },
       }),
-    onSuccess: () => {
+    onSuccess: ({ message }) => {
       queryClient.setQueryData(["employees"], (oldData) => {
         return oldData.map((e) => (e.id === id ? { ...e, salary: value } : e));
       });
-      toast.success("Salary updated");
+      toast.success(message);
       setIsEditing(false);
     },
     onError: () => {
@@ -67,7 +67,7 @@ const SalaryCell = ({ user }) => {
             min={salary}
             max={1000000}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => setValue(Number(e.target.value))}
             ref={inputRef}
             className="w-[150px] h-8 rounded-md border shadow-sm px-3"
             type="number"

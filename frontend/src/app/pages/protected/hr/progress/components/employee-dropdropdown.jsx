@@ -9,8 +9,6 @@ const EmployeeDropdown = () => {
   const [searchParams] = useSearchParams();
   const name = searchParams.get("employee_name");
 
-  console.log(name);
-
   const { data: employees = [] } = useQuery({
     queryKey: ["employee-names"],
     queryFn: () =>

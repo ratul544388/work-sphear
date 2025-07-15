@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 /**
- * @typedef {"createWorkEntry" | "updateWorkEntry" | "confirmModal" | "paySalary" | "fireModal" | "payment"} ModalType
+ * @typedef {"createWorkEntry" | "updateWorkEntry" | "confirmModal" | "payroll" | "fireModal" | "payment"} ModalType
  */
 
 /**

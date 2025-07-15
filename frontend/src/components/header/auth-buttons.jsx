@@ -3,7 +3,7 @@ import { buttonVariants } from "../ui/button";
 
 const AuthButtons = () => {
   const { pathname } = useLocation();
-  const visibleRoutes = ["/", "/contact"];
+  const visibleRoutes = ["/", "/contact-us"];
 
   if (!visibleRoutes.includes(pathname)) return null;
 

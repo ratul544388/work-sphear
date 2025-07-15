@@ -28,9 +28,9 @@ const CreateWorkEntryModal = () => {
   };
 
   const defaultValues = {
-    task: "SUPPORT",
-    hours: 4,
-    date: new Date(),
+    task: "",
+    hours: 0,
+    date: undefined,
   };
 
   const handleSuccess = (entry) => {

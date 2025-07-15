@@ -3,6 +3,7 @@ import { useModalStore } from "@/hooks/use-modal-store";
 import { request } from "@/lib/request";
 import { useMutation } from "@tanstack/react-query";
 import { DollarSign } from "lucide-react";
+import { toast } from "sonner";
 
 const PayButton = ({ payroll }) => {
   const { onOpen } = useModalStore();
@@ -11,19 +12,20 @@ const PayButton = ({ payroll }) => {
     mutationFn: () =>
       request({
         method: "post",
-        url: "/admin/create-payment-intent",
+        url: "/payrolls/create-payment-intent",
         data: { payrollId: payroll.id },
       }),
     onSuccess: ({ clientSecret }) => {
       onOpen("payment", { clientSecret });
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message)
     },
   });
 
   return (
     <LoadingButton
+      disabled={payroll.paidAt}
       isLoading={isPending}
       variant="outline"
       size="sm"

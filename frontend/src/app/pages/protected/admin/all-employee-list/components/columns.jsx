@@ -14,7 +14,7 @@ export const columns = [
           <img
             src={image || placeholderUserImage}
             alt="photo"
-            className="size-8 object-cover rounded-full bg-accent"
+            className="w-8 min-w-8 aspect-square object-cover rounded-full bg-accent"
           />
           <div className="text-sm">
             <p className="font-medium">{name}</p>

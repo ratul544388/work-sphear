@@ -22,6 +22,34 @@ export const getUsers = asyncHandler(async (req, res) => {
   return res.status(200).json(users);
 });
 
+export const getEmployees = asyncHandler(async (req, res) => {
+  const employees = await db.user.findMany({
+    where: {
+      role: "EMPLOYEE",
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return res.status(200).json(employees);
+});
+
+export const getAllEmployees = asyncHandler(async (req, res) => {
+  const employees = await db.user.findMany({
+    where: {
+      role: {
+        in: ["EMPLOYEE", "HR"],
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return res.status(200).json(employees);
+});
+
 export const getEmployeeNames = asyncHandler(async (req, res) => {
   const users = await db.user.findMany({
     where: {
@@ -38,11 +66,11 @@ export const getEmployeeNames = asyncHandler(async (req, res) => {
   return res.status(200).json(users);
 });
 
-export const getUserById = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const user = await db.user.findUnique({
+export const getEmployeeById = asyncHandler(async (req, res) => {
+  const { employeeId } = req.params;
+  const employee = await db.user.findUnique({
     where: {
-      id,
+      id: employeeId,
     },
     include: {
       _count: {
@@ -53,7 +81,7 @@ export const getUserById = asyncHandler(async (req, res) => {
     },
   });
 
-  return res.status(200).json(user);
+  return res.status(200).json(employee);
 });
 
 export const getCurrentUser = asyncHandler((req, res) => {
@@ -86,11 +114,11 @@ export const completeProfile = asyncHandler(async (req, res) => {
 
 export const toggleVerified = asyncHandler(async (req, res) => {
   const { isVerified } = req.body;
-  const { id } = req.params;
+  const { employeeId } = req.params;
 
   await db.user.update({
     where: {
-      id,
+      id: employeeId,
     },
     data: {
       isVerified: !isVerified,
@@ -98,4 +126,59 @@ export const toggleVerified = asyncHandler(async (req, res) => {
   });
 
   return res.status(200).json({ success: true });
+});
+
+export const fireEmployee = asyncHandler(async (req, res) => {
+  const { employeeId } = await req.params;
+
+  const employee = await db.user.update({
+    where: {
+      id: employeeId,
+    },
+    data: {
+      isFired: true,
+    },
+    select: {
+      name: true,
+    },
+  });
+
+  return res.status(200).json({ message: `${employee.name} is fired` });
+});
+
+export const changeEmployeeRole = asyncHandler(async (req, res) => {
+  const { employeeId } = await req.params;
+  const { role } = await req.body;
+
+  const employee = await db.user.update({
+    where: {
+      id: employeeId,
+    },
+    data: {
+      role,
+    },
+    select: {
+      name: true,
+    },
+  });
+
+  return res.status(200).json({ message: `${employee.name} is now ${role}` });
+});
+
+export const updateEmployeeSalary = asyncHandler(async (req, res) => {
+  const { employeeId } = await req.params;
+  const { salary } = await req.body;
+  const employee = await db.user.update({
+    where: {
+      id: employeeId,
+    },
+    data: {
+      salary,
+    },
+    select: {
+      name: true,
+    },
+  });
+
+  return res.status(200).json({ message: `${employee.name}'s salary updated` });
 });

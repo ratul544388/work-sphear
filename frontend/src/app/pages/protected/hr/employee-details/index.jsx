@@ -1,12 +1,11 @@
 import PageHeader from "@/components/page-header";
 import Title from "@/components/title";
+import UserVerified from "@/components/user-verified";
 import { placeholderUserImage } from "@/constants";
 import { request } from "@/lib/request";
 import { useQuery } from "@tanstack/react-query";
-import { AlertCircle, Verified } from "lucide-react";
 import { useParams } from "react-router";
 import Loader from "./components/loader";
-import UserVerified from "@/components/user-verified";
 import BarChart from "./components/salary-vs-month-chart";
 
 const EmployeeDetails = () => {

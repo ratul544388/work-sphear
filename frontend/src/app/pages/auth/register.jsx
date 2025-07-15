@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { registerSchema } from "@/validations";
 import { Link } from "react-router";
 import GoogleLogin from "./google-login";
+import Title from "@/components/title";
 
 const Register = () => {
   const defaultValues = {
@@ -13,57 +14,60 @@ const Register = () => {
     confirmPassword: "Ratul544@",
   };
   return (
-    <FormWrapper
-      schema={registerSchema}
-      defaultValues={defaultValues}
-      title="Create Your Account"
-      description="Register with your work email to access the Employee Management System."
-      actionLabel="Register"
-      api="/auth/register"
-      redirectUrlAfterSuccess="/complete-profile"
-      invalidateQueryKeys={["user"]}
-      className="relative pb-36"
-    >
-      {({ form, isPending }) => (
-        <>
-          <FormInput
-            autoFocus
-            control={form.control}
-            name="email"
-            placeholder="Enter your Email"
-            disabled={isPending}
-          />
-          <FormPasswordInput
-            control={form.control}
-            name="password"
-            placeholder="Enter your password"
-            disabled={isPending}
-          />
-          <FormPasswordInput
-            control={form.control}
-            name="confirmPassword"
-            label="Confirm Password"
-            placeholder="Enter your confirm password"
-            disabled={isPending}
-          />
-          <div className="absolute flex flex-col inset-x-0 px-5 bottom-7">
-            <div className="text-sm text-center font-medium">
-              Already have an account?{" "}
-              <Link
-                to="/auth/login"
-                className={cn(
-                  "hover:underline",
-                  isPending && "opacity-60 pointer-events-none"
-                )}
-              >
-                Login
-              </Link>
+    <>
+      <Title>Register</Title>
+      <FormWrapper
+        schema={registerSchema}
+        defaultValues={defaultValues}
+        title="Create Your Account"
+        description="Register with your work email to access the Employee Management System."
+        actionLabel="Register"
+        api="/auth/register"
+        redirectUrlAfterSuccess="/complete-profile"
+        invalidateQueryKeys={["user"]}
+        className="relative pb-36"
+      >
+        {({ form, isPending }) => (
+          <>
+            <FormInput
+              autoFocus
+              control={form.control}
+              name="email"
+              placeholder="Enter your Email"
+              disabled={isPending}
+            />
+            <FormPasswordInput
+              control={form.control}
+              name="password"
+              placeholder="Enter your password"
+              disabled={isPending}
+            />
+            <FormPasswordInput
+              control={form.control}
+              name="confirmPassword"
+              label="Confirm Password"
+              placeholder="Enter your confirm password"
+              disabled={isPending}
+            />
+            <div className="absolute flex flex-col inset-x-0 px-5 bottom-7">
+              <div className="text-sm text-center font-medium">
+                Already have an account?{" "}
+                <Link
+                  to="/auth/login"
+                  className={cn(
+                    "hover:underline",
+                    isPending && "opacity-60 pointer-events-none"
+                  )}
+                >
+                  Login
+                </Link>
+              </div>
+              <GoogleLogin disabled={isPending} />
             </div>
-            <GoogleLogin disabled={isPending} />
-          </div>
-        </>
-      )}
-    </FormWrapper>
+          </>
+        )}
+      </FormWrapper>
+    </>
   );
 };
 

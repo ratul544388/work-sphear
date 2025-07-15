@@ -12,7 +12,7 @@ import PaymentModal from "./components/payment-modal";
 const Payroll = () => {
   const { isPending, data: payrolls } = useQuery({
     queryKey: ["payrolls"],
-    queryFn: () => request({ url: "/admin/payrolls" }),
+    queryFn: () => request({ url: "/payrolls" }),
   });
 
 

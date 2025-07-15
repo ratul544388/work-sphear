@@ -8,14 +8,15 @@ import { payrollRequestSchema } from "@/validations";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const PaySalaryModal = () => {
+const PayrollModal = () => {
   const { open, type, onClose, data = {} } = useModalStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const { salary, employeeId } = data;
+
   return (
     <Modal
-      open={open && type === "paySalary"}
+      open={open && type === "payroll"}
       title="Submit Payroll Request"
       description="Specify the salary, month, and year to initiate the payroll process for the selected employee."
       onOpenChange={onClose}
@@ -30,7 +31,7 @@ const PaySalaryModal = () => {
           year: new Date().getFullYear().toString(),
           salary,
         }}
-        api={`/hr/payroll/${employeeId}`}
+        api={`/payrolls/${employeeId}`}
         actionLabel="Pay"
         setIsPending={setIsLoading}
         onSuccess={() => {
@@ -66,4 +67,4 @@ const PaySalaryModal = () => {
   );
 };
 
-export default PaySalaryModal;
+export default PayrollModal;

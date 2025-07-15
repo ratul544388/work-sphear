@@ -1,4 +1,5 @@
 import NotFound from "@/app/not-found";
+import Container from "@/components/container";
 import { useAuthStore } from "@/hooks/use-auth-store";
 import { Navigate, Outlet } from "react-router";
 
@@ -8,11 +9,15 @@ const EmployeeLayout = () => {
     return <NotFound />;
   }
 
-  if(user.isFired) {
-    return <Navigate to="/you-are-fired"/>
+  if (user.isFired) {
+    return <Navigate to="/you-are-fired" />;
   }
-  
-  return <Outlet />;
+
+  return (
+    <Container>
+      <Outlet />
+    </Container>
+  );
 };
 
 export default EmployeeLayout;

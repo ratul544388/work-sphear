@@ -1,60 +1,55 @@
+import { LoadingButton } from "@/components/loading-button";
 import Modal from "@/components/modal";
 import { useModalStore } from "@/hooks/use-modal-store";
+import { stripePromise } from "@/lib/stripe";
 import {
   Elements,
   PaymentElement,
-  useStripe,
   useElements,
+  useStripe,
 } from "@stripe/react-stripe-js";
-import { stripePromise } from "@/lib/stripe";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const CheckoutForm = ({ onClose }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (e) => {
+      e.preventDefault();
+      if (!stripe || !elements) return;
 
-    if (!stripe || !elements) return;
+      const { error, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        redirect: "if_required",
+      });
 
-    setLoading(true);
+      if (error) throw new Error(error.message || "Payment failed");
+      if (paymentIntent?.status !== "succeeded")
+        throw new Error("Payment not successful");
 
-    const { error, paymentIntent } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/payment-success`, // optional redirect
-      },
-      redirect: "if_required", // prevents auto redirect
-    });
-
-    setLoading(false);
-
-    if (error) {
-      setError(error.message || "Payment failed");
-    } else if (paymentIntent?.status === "succeeded") {
+      return paymentIntent;
+    },
+    onSuccess: () => {
+      toast.success("User was paid successfully");
       onClose();
-      // Optionally show success toast
-    }
-  };
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={mutate} className="flex flex-col gap-4">
       <PaymentElement />
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      <button
-        type="submit"
-        disabled={!stripe || loading}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        {loading ? "Processing..." : "Pay Now"}
-      </button>
+      <LoadingButton className="ml-auto" type="submit" disabled={!stripe} isLoading={isPending}>
+        Pay Now
+      </LoadingButton >
     </form>
   );
 };
+
 
 export const PaymentModal = () => {
   const { open, type, onClose, data = {} } = useModalStore();

@@ -1,9 +1,9 @@
-import { Link } from "react-router";
-import PaySalaryButton from "./pay-salary-button";
-import VerifiedCellButton from "./verified-cell-button";
 import { buttonVariants } from "@/components/ui/button";
-import { FileText } from "lucide-react";
 import { placeholderUserImage } from "@/constants";
+import { FileText } from "lucide-react";
+import { Link } from "react-router";
+import CellPayButton from "./cell-pay-button";
+import VerifiedCellButton from "./verified-cell-button";
 
 export const columns = [
   {
@@ -13,7 +13,7 @@ export const columns = [
       <img
         src={row.original.image || placeholderUserImage}
         alt="photo"
-        className="size-8 object-cover rounded-full bg-accent"
+        className="w-8 min-w-8 aspect-square object-cover rounded-full"
       />
     ),
   },
@@ -35,9 +35,13 @@ export const columns = [
     header: "Salary",
   },
   {
+    accessorKey: "bankAccountNo",
+    header: "Bank Account No.",
+  },
+  {
     accessorKey: "pay",
     header: "Pay",
-    cell: ({ row }) => <PaySalaryButton employee={row.original} />,
+    cell: ({ row }) => <CellPayButton employee={row.original} />,
   },
   {
     accessorKey: "details",

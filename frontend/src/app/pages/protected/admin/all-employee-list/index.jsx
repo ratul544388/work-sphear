@@ -10,7 +10,7 @@ import { ConfirmModal } from "@/components/confirm-modal";
 const AllEmployeeList = () => {
   const { data: employees = [], isPending } = useQuery({
     queryKey: ["employees"],
-    queryFn: () => request({ url: "/admin/employees" }),
+    queryFn: () => request({ url: "/users/employees/all" }),
   });
 
   return (

@@ -11,20 +11,23 @@ const Dropdown = ({
   className = "",
   variant = "outline",
   size = "default",
+  disabled,
 }) => {
   const [open, setOpen] = useState(false);
   const showChecked = items.some((item) => item.checked !== undefined);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant={variant} size={size} className={className}>
+        <Button
+          disabled={disabled}
+          variant={variant}
+          size={size}
+          className={className}
+        >
           {children}
           {showArrowIcon && (
             <ChevronDown
-              className={cn(
-                "transition ease-in",
-                open && "rotate-180"
-              )}
+              className={cn("transition ease-in", open && "rotate-180")}
             />
           )}
         </Button>

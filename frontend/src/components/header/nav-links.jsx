@@ -8,7 +8,7 @@ const NavLinks = () => {
   const { user } = useAuthStore();
   const { pathname } = useLocation();
   return (
-    <nav className="hidden sm:block">
+    <nav className="hidden md:block">
       <ul className="flex">
         {navLinks(user?.role).map(({ href, label }) => (
           <li key={label}>

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-const Container = ({ children, className, elem = "div", ...props }) => {
+const Container = ({ children, className = "", elem = "div", ...props }) => {
   const Elem = elem || "div";
   return (
     <Elem

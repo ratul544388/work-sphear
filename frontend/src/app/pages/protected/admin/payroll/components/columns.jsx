@@ -1,8 +1,5 @@
-import {
-  MonthNumberToStringMap,
-  placeholderUserImage
-} from "@/constants";
-import { formatPrice } from "@/lib/utils";
+import { MonthNumberToStringMap, placeholderUserImage } from "@/constants";
+import { formatDate, formatPrice } from "@/lib/utils";
 import PayButton from "./pay-button";
 
 export const columns = [
@@ -43,6 +40,10 @@ export const columns = [
   {
     accessorKey: "paidAt",
     header: "Payment Date",
+    cell: ({ row }) => {
+      const { paidAt } = row.original;
+      return paidAt ? formatDate(paidAt) : "";
+    },
   },
   {
     accessorKey: "pay",

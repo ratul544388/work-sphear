@@ -21,7 +21,7 @@ const VerifiedCellButton = ({ employee }) => {
           } else {
             toast.success("Employee marked as verified");
           }
-          queryClient.setQueryData(["employee-list"], (oldData) => {
+          queryClient.setQueryData(["employees"], (oldData) => {
             return oldData.map((employee) =>
               employee.id !== id
                 ? employee
@@ -29,7 +29,10 @@ const VerifiedCellButton = ({ employee }) => {
             );
           });
         },
-        onError: () => toast.error("Something went wrong"),
+        onError: (error) => {
+          console.log(error);
+          toast.error("Something went wrong");
+        },
       }),
   });
 

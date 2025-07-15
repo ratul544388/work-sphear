@@ -1,4 +1,6 @@
+import BottomNavbar from "@/components/bottom-navbar";
 import Container from "@/components/container";
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import PageLoader from "@/components/page-loader";
 import { useAuthStore } from "@/hooks/use-auth-store";
@@ -30,9 +32,11 @@ const MainLayout = () => {
   return (
     <>
       <Header />
-      <Container elem="main" className="min-h-main">
+      <main className="min-h-main">
         <Outlet />
-      </Container>
+        <BottomNavbar/>
+      </main>
+      <Footer/>
     </>
   );
 };

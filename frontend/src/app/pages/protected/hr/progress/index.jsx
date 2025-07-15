@@ -17,7 +17,7 @@ const Progress = () => {
     queryKey: ["progress", task, employeeName, month],
     queryFn: () =>
       request({
-        url: "/work-entries",
+        url: "/work-entries/all",
         params: { task, employee_name: employeeName, month },
       }),
   });
