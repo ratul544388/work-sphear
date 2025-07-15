@@ -12,9 +12,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const CheckoutForm = ({ onClose }) => {
+  const queryClient = useQueryClient();
   const stripe = useStripe();
   const elements = useElements();
-  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (e) => {
@@ -32,9 +32,11 @@ const CheckoutForm = ({ onClose }) => {
 
       return paymentIntent;
     },
-    onSuccess: () => {
-      toast.success("User was paid successfully");
-      queryClient.invalidateQueries({ queryKey: ["payrolls"] });
+    onSuccess: async () => {
+      toast.success("Payment succeeded. Updating status...");
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      queryClient.invalidateQueries(["payrolls"]);
+      toast.success("Payroll marked as paid.");
       onClose();
     },
     onError: (error) => {
