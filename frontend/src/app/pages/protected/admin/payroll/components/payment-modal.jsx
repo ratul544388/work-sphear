@@ -40,7 +40,7 @@ const CheckoutForm = ({ onClose }) => {
       onClose();
     },
     onError: (error) => {
-      toast.error(error);
+      toast.error(error)
     },
   });
 
