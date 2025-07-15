@@ -8,12 +8,13 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const CheckoutForm = ({ onClose }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (e) => {
@@ -33,6 +34,7 @@ const CheckoutForm = ({ onClose }) => {
     },
     onSuccess: () => {
       toast.success("User was paid successfully");
+      queryClient.invalidateQueries({ queryKey: ["payrolls"] });
       onClose();
     },
     onError: (error) => {
@@ -43,13 +45,17 @@ const CheckoutForm = ({ onClose }) => {
   return (
     <form onSubmit={mutate} className="flex flex-col gap-4">
       <PaymentElement />
-      <LoadingButton className="ml-auto" type="submit" disabled={!stripe} isLoading={isPending}>
+      <LoadingButton
+        className="ml-auto"
+        type="submit"
+        disabled={!stripe}
+        isLoading={isPending}
+      >
         Pay Now
-      </LoadingButton >
+      </LoadingButton>
     </form>
   );
 };
-
 
 export const PaymentModal = () => {
   const { open, type, onClose, data = {} } = useModalStore();
