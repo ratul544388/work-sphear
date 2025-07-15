@@ -14,7 +14,7 @@ import contactRoutes from "./routes/contact.route.js";
 import payrollsRoute from "./routes/payrolls.route.js";
 import usersRoute from "./routes/users-route.js";
 import workEntriesRoute from "./routes/work-entries.route.js";
-import stripeWebhookRoute from './routes/webhooks/stripe.js'
+import stripeWebhookRoute from "./routes/webhooks/stripe.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -57,6 +57,12 @@ app.use("/api/work-entries", workEntriesRoute);
 app.use("/api/payrolls", payrollsRoute);
 app.use("/api/cloudinary", cloudinaryRoute);
 app.use("/api/contact", contactRoutes);
+
+app.get("/test", (req, res) => {
+  res.send({
+    secure: process.env.NODE_ENV === "production",
+  });
+});
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
