@@ -10,8 +10,8 @@ import Title from "@/components/title";
 const Register = () => {
   const defaultValues = {
     email: "",
-    password: "Ratul544@",
-    confirmPassword: "Ratul544@",
+    password: "",
+    confirmPassword: "",
   };
   return (
     <>

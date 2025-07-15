@@ -45,7 +45,7 @@ export const workEntrySchema = z.object({
     {
       required_error: "Task type is required",
       invalid_type_error: "Invalid task type",
-    }
+    },
   ),
   hours: z.coerce
     .number({

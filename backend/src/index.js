@@ -10,11 +10,11 @@ import "./lib/passport.js";
 
 import authRoutes from "./routes/auth.route.js";
 import cloudinaryRoute from "./routes/cloudinary.route.js";
+import contactRoutes from "./routes/contact.route.js";
 import payrollsRoute from "./routes/payrolls.route.js";
 import usersRoute from "./routes/users-route.js";
-import stripeWebhookRoute from './routes/webhooks/stripe.js';
 import workEntriesRoute from "./routes/work-entries.route.js";
-import contactRoutes from "./routes/contact.route.js";
+import stripeWebhookRoute from './routes/webhooks/stripe.js'
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +27,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/api/webhooks/stripe", stripeWebhookRoute);
 
 app.use(
   session({
@@ -41,6 +43,7 @@ app.use(passport.session());
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send({
@@ -54,7 +57,6 @@ app.use("/api/work-entries", workEntriesRoute);
 app.use("/api/payrolls", payrollsRoute);
 app.use("/api/cloudinary", cloudinaryRoute);
 app.use("/api/contact", contactRoutes);
-app.use("/api/webhooks/stripe", stripeWebhookRoute);
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);

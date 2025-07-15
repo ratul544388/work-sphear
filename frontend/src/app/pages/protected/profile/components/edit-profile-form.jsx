@@ -5,6 +5,7 @@ import ImageUpload from "@/components/image-upload";
 import { useAuthStore } from "@/hooks/use-auth-store";
 import { completeProfileSchema } from "@/validations";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 const EditProfileForm = () => {
   const { user, setUser } = useAuthStore();
@@ -32,6 +33,7 @@ const EditProfileForm = () => {
       onSuccess={(user) => {
         setUser(user);
         navigate(`/profile`);
+        toast.success("Profile Updated")
       }}
     >
       {({ isPending, form }) => {

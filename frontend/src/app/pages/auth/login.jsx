@@ -10,7 +10,7 @@ import Title from "@/components/title";
 const Login = () => {
   const defaultValues = {
     email: "",
-    password: "Ratul544@",
+    password: "",
   };
   return (
     <>
