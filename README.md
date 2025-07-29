@@ -1,105 +1,68 @@
-```md
-# 🏋️ Gym Admin Management
+# 🏋️ WorkSphear – Employee & HR Management System
 
-A full-featured Gym Admin Management web application built with React, Node.js, MongoDB, and Tailwind CSS. This app allows gym administrators to manage members, subscriptions, attendance, payments, trainers, and more through a modern dashboard interface.
+**WorkSphear** is a full-featured employee and HR management platform designed to simplify organizational workflows. With role-based access for Admin, HR, and Employees, the platform helps teams manage member enrollment, salary processing, and task tracking efficiently — all from a unified dashboard.
 
-## 🌐 Live Demo
-
-👉 [Click Here to View Live Demo](https://gym-admin-management.vercel.app)
-
----
-
-## 🚀 Features
-
-- 🧑‍💼 Role-based dashboard for Admin, HR, and Employees
-- 🧾 Member registration and subscription management
-- 📅 Attendance and salary tracking
-- 💰 Payment and expense management
-- 📊 Analytics and reporting dashboard
-- 🛡️ Authentication and protected routes
-- 📱 Fully responsive and mobile-friendly
-- 🧩 Modular and clean code structure
+🔗 **Live Demo**: [work-sphear.vercel.app](https://work-sphear.vercel.app)  
+📁 **Repository**: [GitHub – ratul544388/work-sphear](https://github.com/ratul544388/work-sphear)
 
 ---
 
 ## 🛠️ Tech Stack
 
-**Frontend:**
-- React.js
-- Tailwind CSS
-- DaisyUI
-- Recharts
-- Axios
-- Firebase Auth
+### 🔹 Frontend
+- **Framework**: React.js
+- **Styling**: Tailwind CSS, ShadcnUI
+- **Charts**: Recharts
+- **Forms & Validation**: React Hook Form + Zod
+- **Auth**: Firebase Authentication
+- **HTTP**: Axios
 
-**Backend:**
-- Node.js
-- Express.js
-- MongoDB
-- JWT for Auth
-- Mongoose
-
-**Others:**
-- Vite
-- Dotenv
-- React Hook Form & Zod
+### 🔹 Backend & APIs
+- **Server**: Node.js, Express.js
+- **Database**: MongoDB (Mongoose)
+- **Authentication**: JWT + Passport.js (Google Login)
+- **Payments**: Stripe
+- **Others**: Dotenv
 
 ---
 
-## 🔐 Authentication
+## 🚀 Getting Started
 
-- Firebase Authentication (Email/Password)
-- JSON Web Tokens (JWT) for secure API access
-- Role-based access (Admin, HR, Employee)
-
----
-
-## 📁 Folder Structure
-
-```
-
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   └── utils/
-│   └── ...
-├── server/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   └── ...
-
-````
-
----
-
-## ⚙️ Setup Instructions
-
-### 1. Clone the Repo
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/gym-admin-management.git
-cd gym-admin-management
+git clone https://github.com/ratul544388/work-sphear.git
+cd work-sphear
 ````
 
-### 2. Install Client Dependencies
+### 2. Install client dependencies
 
 ```bash
 cd client
 npm install
 ```
 
-### 3. Install Server Dependencies
+### 3. Install server dependencies
 
 ```bash
 cd ../server
 npm install
 ```
 
-### 5. Run the Project
+### 4. Create environment variables
+
+Set up your `.env` files for both client and server as needed. Ensure values like:
+
+```env
+JWT_SECRET=
+MONGO_URI=
+FIREBASE_API_KEY=
+STRIPE_SECRET_KEY=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
+
+### 5. Run the development servers
 
 ```bash
 # Start backend
@@ -113,26 +76,59 @@ npm run dev
 
 ---
 
-## 🧪 Testing
+## ✨ Features
 
-* Manual testing for all key routes
-* Basic unit testing (optional via Jest or Vitest)
-* Postman collection available for API testing
+### 👨‍💼 Role-Based Access
+
+* Separate dashboards for Admin, HR, and Employees
+* Secure login and protected routes
+
+### 🧾 HR & Salary Management
+
+* Enroll members under dynamic plans
+* Manage renewals, salary status, and workflows
+* Approve or reject payments
+
+### 📊 Dashboard & Insights
+
+* Track revenue, expenses, and member data
+* Visual stats using interactive charts
+* Today’s stats, monthly revenue, and more
+
+### 🔐 Authentication
+
+* JWT-based secured login
+* Google login using Passport.js
+* Role verification on route access
+
+### 📱 Responsive Design
+
+* Fully mobile-friendly UI
+* Built with a modular and maintainable codebase
 
 ---
 
-## 🤝 Contributing
+## 🧪 Scripts
 
-Contributions, issues, and feature requests are welcome!
-Feel free to fork the repo and submit a pull request.
+* `npm run dev` – Run development server
+* `npm run build` – Build for production
+* `npm run start` – Start production server
 
 ---
 
 ## 📬 Contact
 
-**Developer:** Ratul Hossain
+**Ratul Hossain**
+📍 Dhaka, Bangladesh
 📧 Email: [ratul.hossain.dev@gmail.com](mailto:ratul.hossain.dev@gmail.com)
-🌍 Location: Dhaka, Bangladesh
-🔗 [LinkedIn](https://www.linkedin.com/in/ratul-hossain-dev) | [GitHub](https://github.com/ratul544388)
+🔗 [LinkedIn](https://www.linkedin.com/in/ratul-hossain-dev) • [GitHub](https://github.com/ratul544388)
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
 
 ```
+
+---
