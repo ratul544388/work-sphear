@@ -1,4 +1,4 @@
-# 🏋️ WorkSphear – Employee & HR Management System
+# WorkSphear – Employee & HR Management System
 
 **WorkSphear** is a full-featured employee and HR management platform designed to simplify organizational workflows. With role-based access for Admin, HR, and Employees, the platform helps teams manage member enrollment, salary processing, and task tracking efficiently — all from a unified dashboard.
 
